@@ -5,8 +5,18 @@
 <script setup lang="ts">
     import * as THREE from 'three'
 
-    let width = screen.availWidth / 2
-    let height = screen.availHeight / 2
+    let width = window.innerWidth / 2
+    let height = window.innerHeight / 2
+
+        // handle resizing
+    window.addEventListener('resize', () => {
+        width = window.innerWidth / 2
+        height = window.innerHeight / 2
+
+        renderer.setSize(width, height)
+        camera.aspect = width / height
+        camera.updateProjectionMatrix()
+    }, false)
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
